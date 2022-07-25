@@ -1,102 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>SIGNATURE RECOGNITION AND VERIFICATION SYSTEM </title>
+    <title>SIGNATURE RECOGNITION AND VERIFICATION SYSTEM</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet" />
+  </head>
 
-</head>
+  <body>
+    <!-- Navigation -->
+    <%- include("partials/nav") %>
 
-<body>
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Page Content -->
     <div class="container">
-        <a class="navbar-brand" href="./">SIGNATURE RECOGNITION AND VERIFICATION SYSTEM </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="./">Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="newsignature.php" style="color:#fff">Add new Signature</a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Page Content -->
-<div class="container">
-
-    <div class="row">
-
+      <div class="row">
         <!-- Blog Entries Column -->
-        <div class="col-md-8" style="margin-top: 100px;">
-<img src="school-gate.jpg" class="img-responsive" width="1200">
+        <div class="col-md-8" style="margin-top: 100px">
+          <img src="school-gate.jpg" class="img-responsive" width="1200" />
         </div>
 
         <!-- Sidebar Widgets Column -->
-<div class="col-md-4" style="margin-top: 100px;">
-
-<!-- Search Widget -->
-<div class="card my-4">
-    <h5 class="card-header">Your Signature</h5>
-    <div class="card-body">
-        <form action="index.php" method="post" enctype="multipart/form-data">
-        <div class="input-group">
-            <input type="password" name="inputPassword" class="form-control" placeholder="Sign your signature here...">
-            <span class="input-group-btn">
-      <button class="btn btn-secondary" name="btnLogin">Verify</button>
-    </span>
+        <div class="col-md-4" style="margin-top: 100px">
+          <!-- Search Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Your Signature</h5>
+            <div class="card-body">
+              <form
+                action="/verify"
+                method="post"
+              >
+                <div class="input-group">
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter your email here..."
+                  />
+                </div>
+                <div class="input-group">
+                  <input
+                    type="password"
+                    name="signature"
+                    class="form-control mt-3"
+                    placeholder="Sign your signature here..."
+                  />
+                </div>
+                <div class="mt-3">
+                  <button class="btn btn-secondary" type="submit">
+                    Verify
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        </form>
-    </div>
-</div>
-
-</div>
-
-        
-    </div>
-    <!-- /.row -->
-<div class="row" style="margin-top: 30px;">
-    <div class="col-md-12">
-        <div class="form-group">
+      </div>
+      <!-- /.row -->
+      <div class="row" style="margin-top: 30px">
+        <div class="col-md-12">
+          <div class="form-group">
             <h4>Our Story (Vision/Mission)</h4>
-            <p class="custom-control-label" style="text-align:justify"><strong>Mission: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ducimus error quia! Illum atque excepturi soluta labore doloremque maiores, quibusdam accusamus molestias animi incidunt qui ratione sit eaque, reiciendis facere.</p>
-            <br><br>
-            <p class="custom-control-label" style="text-align:justify"><strong>Vision: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, eos aliquid eveniet voluptatibus corporis voluptas optio iste veniam maiores veritatis! Esse, reiciendis? Aliquam, voluptas fugit recusandae distinctio atque et sapiente.</p>
-      <br><br>
-            <center><h4 style="color:#b21f2d"> SIGNATURE RECOGNITION AND VERIFICATION SYSTEM </h4></center>
+            <p class="custom-control-label" style="text-align: justify">
+              <strong>Mission: </strong>Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Possimus ducimus error quia! Illum atque
+              excepturi soluta labore doloremque maiores, quibusdam accusamus
+              molestias animi incidunt qui ratione sit eaque, reiciendis facere.
+            </p>
+            <br /><br />
+            <p class="custom-control-label" style="text-align: justify">
+              <strong>Vision: </strong>Lorem ipsum dolor sit, amet consectetur
+              adipisicing elit. Minus, eos aliquid eveniet voluptatibus corporis
+              voluptas optio iste veniam maiores veritatis! Esse, reiciendis?
+              Aliquam, voluptas fugit recusandae distinctio atque et sapiente.
+            </p>
+            <br /><br />
+            <center>
+              <h4 style="color: #b21f2d">
+                SIGNATURE RECOGNITION AND VERIFICATION SYSTEM
+              </h4>
+            </center>
+          </div>
         </div>
-    </div>
-</div>
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; NASCOMSOFT</p>
+      </div>
     </div>
     <!-- /.container -->
-</footer>
 
-<!-- Bootstrap core JavaScript -->
-<script src="bootstrap.bundle.min.js"></script>
+    <%- include("partials/footer") %>
 
-</body>
-
+    <!-- Bootstrap core JavaScript -->
+    <script src="bootstrap.bundle.min.js"></script>
+  </body>
 </html>
-

@@ -4,15 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.ts",
+    "debugger": "nodemon --watch . -e ts --exec node --inspect -r ts-node/register app.ts",
+    "build": "tsc -p ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.6",
@@ -20,10 +26,14 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/connect-flash": "^0.0.37",
+    "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.5",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.7",
     "@types/node": "^18.0.6",
     "nodemon": "^2.0.19",
     "ts-node": "^10.9.1",
