@@ -33,6 +33,15 @@ const fileSchema = new mongoose.Schema<File>({
     filePath: {
         type: String,
         required: true
+    },
+    extname: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: new Date()
     }
 });
 

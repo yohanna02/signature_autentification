@@ -7,4 +7,6 @@ export default interface File {
     signature: string;
     originalFileName: string;
     filePath: string;
+    extname: string;
+    date: Date;
 };

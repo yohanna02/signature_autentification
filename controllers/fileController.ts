@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcryptjs";
 import fs from "fs";
+import path from "path";
 
 import fileModel from "../models/file_model";
 
@@ -23,7 +24,13 @@ export const saveFile = async (req: Request, res: Response, next: NextFunction) 
             return;
         }
 
+        if (!req.file) {
+            res.send('<h1>Error!!!</h1><a href="http://localhost:3000">Go Home</a>');
+            return;
+        }
+
         const hashedSignature = await bcrypt.hash(req.body.signature, salt);
+        const thePath = path.parse(req.file.path);
 
         const newFile = new fileModel({
             firstname: req.body.firstname,
@@ -32,8 +39,9 @@ export const saveFile = async (req: Request, res: Response, next: NextFunction) 
             phonenumber: req.body.phonenumber,
             address: req.body.address,
             signature: hashedSignature,
-            originalFileName: req.file?.originalname.split(".")[0],
-            filePath: req.file?.path
+            originalFileName: path.basename(req.file.originalname, thePath.ext),
+            filePath: req.file.path,
+            extname: thePath.ext
         });
 
         await newFile.save();
@@ -44,3 +52,56 @@ export const saveFile = async (req: Request, res: Response, next: NextFunction) 
         next(err);
     }
 };
+
+export const verifySignature = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email, signature } = req.body;
+
+        const fileExist = await fileModel.findOne({ email });
+
+        if (!fileExist) {
+            req.flash("emailError", "Email not registered");
+            req.flash("email", email);
+            res.redirect("/");
+            return;
+        }
+
+        const signatureValid = await bcrypt.compare(signature, fileExist.signature);
+
+        if (!signatureValid) {
+            req.flash("email", email);
+            req.flash("signatureError", "Incorrect Signature");
+            res.redirect("/");
+            return;
+        }
+
+        req.flash("firstname", fileExist.firstname);
+        req.flash("lastname", fileExist.lastname);
+        req.flash("email", fileExist.email);
+        req.flash("phonenumber", fileExist.phonenumber);
+        req.flash("address", fileExist.address);
+        req.flash("date", fileExist.date.toLocaleString());
+        req.flash("fileId", fileExist._id.toString());
+        res.redirect("/file");
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const downloadFile = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { fileId } = req.params;
+
+        const fileExist = await fileModel.findById(fileId);
+
+        if (!fileExist) {
+            res.send('<h1>File Not found</h1><a href="http://localhost:3000">Go Home</a>');
+            return;
+        }
+
+        const thePath = path.parse(fileExist.filePath);
+        res.download(fileExist.filePath, `${fileExist.originalFileName}${thePath.ext}`);
+    } catch (err) {
+        next(err);
+    }
+}

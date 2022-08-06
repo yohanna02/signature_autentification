@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 
 import AppError from "./interfaces/AppError";
 import pageRoute from "./routes/pages";
+import { downloadFile } from "./controllers/fileController";
 
 dotenv.config();
 
@@ -40,7 +41,11 @@ app.set("view engine", "ejs");
 app.use(pageRoute);
 
 app.get("/", (req, res) => {
-    res.render("index");
+    res.render("index", {
+        email: req.flash("email"),
+        emailError: req.flash("emailError"),
+        signatureError: req.flash("signatureError")
+    });
 });
 
 app.get("/register", (req, res) => {
@@ -54,6 +59,20 @@ app.get("/register", (req, res) => {
         success: req.flash("success")
     });
 });
+
+app.get("/file", (req, res) => {
+    res.render("proofsignature", {
+        firstname: req.flash("firstname"),
+        lastname: req.flash("lastname"),
+        email: req.flash("email"),
+        phonenumber: req.flash("phonenumber"),
+        address: req.flash("address"),
+        date: req.flash("date"),
+        fileId: req.flash("fileId")
+    });
+});
+
+app.get("/file/download/:fileId", downloadFile);
 
 const errorLogger = (error: Error, req: Request, res: Response, next: NextFunction) => {
     if (process.env.NODE_ENV === "development")
